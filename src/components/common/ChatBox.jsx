@@ -4,7 +4,7 @@ import { MessageCircle, X, Send, Phone, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { company } from '../../data/company'
 
-const INITIAL_MSG = 'Hei! Tarvitsetko tarjouksen lämpöpumpusta tai LVI-työstä?'
+const INITIAL_MSG = 'Tarvitsetko tarjouksen lämpöpumpusta tai LVI-työstä?'
 
 function getAutoReply(input) {
   const t = input.toLowerCase()
