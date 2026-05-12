@@ -1,0 +1,48 @@
+// Muokkaa tästä asiakaspalautteet
+export const testimonials = [
+  {
+    id: 1,
+    name: 'Markku Virtanen',
+    location: 'Maaninka',
+    rating: 5,
+    service: 'Vesi-ilmalämpöpumppu',
+    text: 'Erittäin ammattitaitoinen ja nopea palvelu. Asentajat saapuivat sovittuna aikana, työ tehtiin siististi ja loppujen lopuksi säästö lämmityskuluissa on ollut huikea. Suosittelen lämpimästi!',
+    date: '2024-11',
+  },
+  {
+    id: 2,
+    name: 'Tiina Lehtonen',
+    location: 'Kuopio',
+    rating: 5,
+    service: 'Maalämpöpumppu',
+    text: 'Putkipena teki meille maalämpöratkaisun vanhan öljylämmityksen tilalle. Projekti sujui mallikkaasti, hintataso oli kilpailukykyinen ja he vastasivat kaikkiin kysymyksiimme kärsivällisesti.',
+    date: '2024-09',
+  },
+  {
+    id: 3,
+    name: 'Jari Korhonen',
+    location: 'Siilinjärvi',
+    rating: 5,
+    service: 'LVI-urakointi',
+    text: 'Uudisrakennuksen LVI-urakointi sujui erittäin hyvin. Yhteistyö oli mutkatonta, aikataulut pitivät ja laatu oli erinomainen. Myös rakennusmies oli tyytyväinen Putkipenaan.',
+    date: '2024-08',
+  },
+  {
+    id: 4,
+    name: 'Sari Mäkinen',
+    location: 'Maaninka',
+    rating: 5,
+    service: 'Ilmalämpöpumppu',
+    text: 'Tilasimme ilmalämpöpumpun ja oltiin yllättyneitä kuinka nopeasti asennus tapahtui. Laatu on hyvä ja laite toimii hiljaisesti. Hinta oli myös kohtuullinen.',
+    date: '2024-10',
+  },
+  {
+    id: 5,
+    name: 'Petri Nieminen',
+    location: 'Iisalmi',
+    rating: 5,
+    service: 'LVI-huolto',
+    text: 'Lämpöpumppu lakkasi toimimasta joulun alla, soitin päivystysnumeroon ja huoltomies saapui parissa tunnissa. Ongelma korjattiin nopeasti. Erinomainen päivystyspalvelu!',
+    date: '2024-12',
+  },
+]

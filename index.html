@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO -->
+    <title>Putkipena Oy – Lämpöpumput & LVI-palvelut Pohjois-Savossa</title>
+    <meta name="description" content="Putkipena Oy – asiantunteva LVI-yritys Pohjois-Savossa. Asennamme vesi-ilma-, maa- ja ilmalämpöpumput, teemme LVI-huollot, putkiremontit ja urakoinnin. Päivystys 24/7. Pyydä tarjous!" />
+    <meta name="keywords" content="lämpöpumppu Pohjois-Savo, LVI Maaninka, vesi-ilmalämpöpumppu, maalämpöpumppu, ilmalämpöpumppu, LVI-asennus, putkiremontti, LVI-huolto, Putkipena, Kuopio LVI" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.putkipena.fi/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.putkipena.fi/" />
+    <meta property="og:title" content="Putkipena Oy – Lämpöpumput & LVI-palvelut Pohjois-Savossa" />
+    <meta property="og:description" content="Asiantunteva LVI-yritys Pohjois-Savossa. Lämpöpumput, LVI-huollot, putkiremontit ja päivystys 24/7." />
+    <meta property="og:image" content="https://www.putkipena.fi/og-image.jpg" />
+    <meta property="og:locale" content="fi_FI" />
+    <meta property="og:site_name" content="Putkipena Oy" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Putkipena Oy – Lämpöpumput & LVI-palvelut Pohjois-Savossa" />
+    <meta name="twitter:description" content="Asiantunteva LVI-yritys Pohjois-Savossa. Lämpöpumput, LVI-huollot, putkiremontit ja päivystys 24/7." />
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Putkipena Oy",
+      "description": "LVI-yritys Pohjois-Savossa. Lämpöpumput, LVI-huollot, putkiremontit ja urakointi.",
+      "url": "https://www.putkipena.fi",
+      "telephone": "+358441234567",
+      "email": "info@putkipena.fi",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Maaningantie 5",
+        "addressLocality": "Maaninka",
+        "postalCode": "71750",
+        "addressCountry": "FI"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 63.1700,
+        "longitude": 27.3050
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "07:00",
+          "closes": "17:00"
+        }
+      ],
+      "areaServed": "Pohjois-Savo",
+      "priceRange": "€€"
+    }
+    </script>
+    <!-- SPA routing fix for GitHub Pages -->
+    <script>
+      (function(l) {
+        if (l.search[1] === 'p') {
+          var params = l.search.slice(1).split('&').reduce(function(o, s) {
+            var p = s.split('='); o[p[0]] = p.slice(1).join('=').replace(/~and~/g, '&'); return o;
+          }, {});
+          if (params.p !== undefined) {
+            window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + (params.p || '/') +
+              (params.q ? '?' + params.q : '') + l.hash
+            );
+          }
+        }
+      }(window.location));
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
