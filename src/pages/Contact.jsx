@@ -27,7 +27,7 @@ const contactItems = [
     icon: MapPin,
     title: 'Osoite',
     lines: [company.address],
-    sub: 'Toimialue: koko Pohjois-Savo',
+    sub: 'Toimialue: koko Satakunta',
     color: 'text-green-600',
     bg: 'bg-green-50',
   },
@@ -90,7 +90,7 @@ export default function Contact() {
         <div className="grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2 bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-card h-72">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30000!2d27.3050!3d63.1700!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4686c5e8b7b0e00f%3A0x9c8f5e6a4b2c1d3e!2sMaaninka!5e0!3m2!1sfi!2sfi!4v1700000000000!5m2!1sfi!2sfi"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30000!2d21.7974!3d61.4851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x468f1e0a18a15b05%3A0xe2a3c40bc3cdbec6!2sPori!5e0!3m2!1sfi!2sfi!4v1700000000000!5m2!1sfi!2sfi"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -125,7 +125,7 @@ export default function Contact() {
               <p className="text-brand-200 text-sm mb-3">Y-tunnus</p>
               <p className="font-bold">{company.businessId}</p>
               <p className="text-brand-200 text-sm mt-3 mb-1">Toimialue</p>
-              <p className="font-bold">Koko Pohjois-Savo</p>
+              <p className="font-bold">Koko Satakunta</p>
             </div>
           </div>
         </div>

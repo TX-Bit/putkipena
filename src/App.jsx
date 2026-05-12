@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import ChatBox from './components/common/ChatBox'
-import OfferPopup from './components/common/OfferPopup'
 import StickyOfferButton from './components/common/StickyOfferButton'
 
 import Home from './pages/Home'
@@ -61,7 +60,6 @@ function AppRoutes() {
       </AnimatePresence>
       <Footer />
       <ChatBox />
-      <OfferPopup />
       <StickyOfferButton />
     </>
   )

@@ -1,84 +1,47 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MessageCircle, X, Send, Phone } from 'lucide-react'
+import { MessageCircle, X, Send, Phone, ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { company } from '../../data/company'
 
-const BOT_RESPONSES = {
-  default: 'Moi! Olen Putkipenan chattiassistentti. Voin auttaa sinua yleisillä kysymyksillä tai ohjata sinut oikeaan palveluun. Mihin voisin auttaa?',
-  hinta: 'Hinnat vaihtelevat projektin mukaan. Lämpöpumput alkavat noin 1 200 € (ilmalämpö) ja vesi-ilmalämpö noin 5 900 €. Pyydä tarkka tarjous lomakkeella!',
-  lampopumppu: 'Asennettaessa vesi-ilmalämpöpumppu voi säästää lämmityskuluissa 40–60%. Teemme ilmaisen kartoituksen ennen tarjousta.',
-  huolto: 'LVI-huoltopalvelumme kattaa kaikki lämpöpumput ja LVI-laitteet. Tuntiveloitus on 89 €/h. Päivystyshinta 140 €/h.',
-  paivystys: `Päivystysnumeromme on ${company.phone}. Palvelemme 24/7 hätätapauksissa!`,
-  aika: 'Normaalisti pystymme sopimaan asennusajan 1–2 viikon sisällä yhteydenotosta. Hätätapauksissa nopeammin.',
-}
+const INITIAL_MSG = 'Hei! Tarvitsetko tarjouksen lämpöpumpusta tai LVI-työstä?'
 
-function getResponse(input) {
-  const lower = input.toLowerCase()
-  if (lower.match(/hinta|paljonko|maksaa|kustannus|euro/)) return BOT_RESPONSES.hinta
-  if (lower.match(/lämpöpumppu|lämpö|pumppu|ilmalämpö|maalämpö/)) return BOT_RESPONSES.lampopumppu
-  if (lower.match(/huolto|korjaus|vikaantui|rikki/)) return BOT_RESPONSES.huolto
-  if (lower.match(/päivystys|hätä|kiireellinen|apua/)) return BOT_RESPONSES.paivystys
-  if (lower.match(/aika|milloin|kauan|nopeasti|aikataulu/)) return BOT_RESPONSES.aika
-  return 'Hyvä kysymys! Paras tapa saada tarkka vastaus on soittaa meille tai jättää tarjouspyyntö. Olemme apuna ma–pe klo 7–17. Puhelimitse myös päivystys 24/7.'
-}
-
-function Message({ msg }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      className={`flex ${msg.from === 'user' ? 'justify-end' : 'justify-start'} mb-3`}
-    >
-      <div
-        className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-          msg.from === 'user'
-            ? 'bg-brand-700 text-white rounded-br-sm'
-            : 'bg-slate-100 text-slate-800 rounded-bl-sm'
-        }`}
-      >
-        {msg.text}
-      </div>
-    </motion.div>
-  )
+function getAutoReply(input) {
+  const t = input.toLowerCase()
+  if (t.match(/hinta|paljonko|maksaa|euro/))
+    return 'Hinnat vaihtelevat projektin mukaan. Pyydä tarjous niin tehdään sinulle sopiva laskelma.'
+  if (t.match(/lämpöpumppu|ilmalämpö|maalämpö|vesi-ilma/))
+    return 'Asennettavat lämpöpumput: ilmalämpö (alk. 1 200 €), vesi-ilmalämpö (alk. 5 900 €) ja maalämpö (alk. 10 900 €). Pyydä tarkka tarjous!'
+  if (t.match(/huolto|korjaus|vikaantui|rikki/))
+    return 'Hoidamme LVI-huollot nopeasti. Tuntiveloitus 89 €/h. Kiireellisissä soita suoraan!'
+  if (t.match(/aika|milloin|nopeasti/))
+    return 'Yleensä pystymme sopimaan asennusajan 1–2 viikon sisällä. Kiireellisissä töissä nopeamminkin.'
+  return 'Paras tapa saada vastaus on jättää tarjouspyyntö tai soittaa meille suoraan. Olemme tavoitettavissa ma–pe 7–17.'
 }
 
 export default function ChatBox() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([
-    { id: 0, from: 'bot', text: BOT_RESPONSES.default },
+    { id: 0, from: 'bot', text: INITIAL_MSG },
   ])
   const [input, setInput] = useState('')
   const [typing, setTyping] = useState(false)
-  const [unread, setUnread] = useState(1)
   const bottomRef = useRef(null)
 
   useEffect(() => {
-    if (open) {
-      setUnread(0)
-      bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }
+    if (open) bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [open, messages])
 
-  const send = () => {
-    if (!input.trim()) return
-    const userMsg = { id: Date.now(), from: 'user', text: input }
-    setMessages((m) => [...m, userMsg])
+  const send = (text) => {
+    const msg = text || input.trim()
+    if (!msg) return
+    setMessages((m) => [...m, { id: Date.now(), from: 'user', text: msg }])
     setInput('')
     setTyping(true)
-
     setTimeout(() => {
-      const botMsg = { id: Date.now() + 1, from: 'bot', text: getResponse(userMsg.text) }
-      setMessages((m) => [...m, botMsg])
+      setMessages((m) => [...m, { id: Date.now() + 1, from: 'bot', text: getAutoReply(msg) }])
       setTyping(false)
-      if (!open) setUnread((u) => u + 1)
-    }, 900 + Math.random() * 600)
-  }
-
-  const handleKey = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      send()
-    }
+    }, 800 + Math.random() * 400)
   }
 
   return (
@@ -86,68 +49,82 @@ export default function ChatBox() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 12 }}
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 12 }}
-            transition={{ duration: 0.2 }}
-            className="w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col"
-            style={{ height: 420 }}
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            transition={{ duration: 0.18 }}
+            className="w-80 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col"
+            style={{ height: 380 }}
           >
             {/* Header */}
-            <div className="gradient-brand px-5 py-4 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+            <div className="gradient-brand px-4 py-3.5 flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
                 P
               </div>
-              <div className="flex-1">
-                <div className="text-white font-semibold text-sm">Putkipena Asiakaspalvelu</div>
+              <div className="flex-1 min-w-0">
+                <div className="text-white font-semibold text-sm">{company.name}</div>
                 <div className="flex items-center gap-1.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
-                  <span className="text-white/70 text-xs">Online</span>
+                  <span className="text-white/60 text-xs">Vastaamme nopeasti</span>
                 </div>
               </div>
               <button
                 onClick={() => setOpen(false)}
-                className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors flex-shrink-0"
               >
-                <X size={14} />
+                <X size={13} />
               </button>
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4">
-              {messages.map((m) => <Message key={m.id} msg={m} />)}
+            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+              {messages.map((m) => (
+                <div key={m.id} className={`flex ${m.from === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div
+                    className={`max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
+                      m.from === 'user'
+                        ? 'bg-brand-700 text-white rounded-br-sm'
+                        : 'bg-slate-100 text-slate-800 rounded-bl-sm'
+                    }`}
+                  >
+                    {m.text}
+                  </div>
+                </div>
+              ))}
               {typing && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex justify-start mb-3"
-                >
+                <div className="flex justify-start">
                   <div className="bg-slate-100 rounded-2xl rounded-bl-sm px-4 py-3 flex gap-1">
-                    {[0, 0.2, 0.4].map((delay, i) => (
+                    {[0, 0.2, 0.4].map((d, i) => (
                       <motion.div
                         key={i}
                         animate={{ y: [0, -4, 0] }}
-                        transition={{ repeat: Infinity, duration: 0.8, delay }}
+                        transition={{ repeat: Infinity, duration: 0.8, delay: d }}
                         className="w-1.5 h-1.5 rounded-full bg-slate-400"
                       />
                     ))}
                   </div>
-                </motion.div>
+                </div>
               )}
               <div ref={bottomRef} />
             </div>
 
-            {/* Quick replies */}
-            <div className="px-4 pb-2 flex gap-2 overflow-x-auto scrollbar-none">
-              {['Hinnasto', 'Päivystys', 'Lämpöpumput'].map((q) => (
-                <button
-                  key={q}
-                  onClick={() => { setInput(q); }}
-                  className="flex-shrink-0 text-xs bg-brand-50 text-brand-700 hover:bg-brand-100 px-3 py-1.5 rounded-full transition-colors border border-brand-100"
-                >
-                  {q}
-                </button>
-              ))}
+            {/* Quick actions */}
+            <div className="px-4 pb-2 flex gap-2">
+              <Link
+                to="/tarjouspyynto"
+                onClick={() => setOpen(false)}
+                className="flex-1 flex items-center justify-center gap-1.5 text-xs bg-accent-400 hover:bg-accent-500 text-white font-semibold py-2.5 rounded-xl transition-colors"
+              >
+                <ArrowRight size={13} />
+                Pyydä tarjous
+              </Link>
+              <a
+                href={company.phoneHref}
+                className="flex-1 flex items-center justify-center gap-1.5 text-xs bg-brand-50 hover:bg-brand-100 text-brand-700 font-semibold py-2.5 rounded-xl transition-colors border border-brand-100"
+              >
+                <Phone size={13} />
+                Soita
+              </a>
             </div>
 
             {/* Input */}
@@ -155,59 +132,35 @@ export default function ChatBox() {
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKey}
-                placeholder="Kirjoita viesti..."
-                className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-brand-400 transition-colors"
+                onKeyDown={(e) => e.key === 'Enter' && send()}
+                placeholder="Kirjoita kysymys..."
+                className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand-400 transition-colors"
               />
               <button
-                onClick={send}
+                onClick={() => send()}
                 disabled={!input.trim()}
-                className="w-10 h-10 rounded-xl bg-brand-700 hover:bg-brand-800 disabled:bg-slate-200 flex items-center justify-center text-white transition-colors flex-shrink-0"
+                className="w-9 h-9 rounded-xl bg-brand-700 hover:bg-brand-800 disabled:bg-slate-200 flex items-center justify-center text-white transition-colors flex-shrink-0"
               >
-                <Send size={16} />
+                <Send size={14} />
               </button>
             </div>
-
-            {/* Phone shortcut */}
-            <a
-              href={company.phoneHref}
-              className="flex items-center justify-center gap-2 bg-accent-50 hover:bg-accent-100 text-accent-600 text-xs font-semibold py-2.5 transition-colors border-t border-accent-100"
-            >
-              <Phone size={13} />
-              Soita suoraan: {company.phone}
-            </a>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Toggle button */}
+      {/* Toggle — hillitty */}
       <motion.button
         onClick={() => setOpen(!open)}
-        whileTap={{ scale: 0.92 }}
-        className="w-14 h-14 rounded-full bg-brand-700 hover:bg-brand-800 shadow-xl flex items-center justify-center text-white transition-colors relative"
-        aria-label="Avaa chat"
+        whileTap={{ scale: 0.93 }}
+        className="w-13 h-13 w-[52px] h-[52px] rounded-full bg-brand-700 hover:bg-brand-800 shadow-lg flex items-center justify-center text-white transition-colors"
+        aria-label="Chat"
       >
         <AnimatePresence mode="wait">
-          {open ? (
-            <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
-              <X size={22} />
-            </motion.div>
-          ) : (
-            <motion.div key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
-              <MessageCircle size={22} />
-            </motion.div>
-          )}
+          {open
+            ? <motion.div key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}><X size={20} /></motion.div>
+            : <motion.div key="c" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}><MessageCircle size={20} /></motion.div>
+          }
         </AnimatePresence>
-
-        {!open && unread > 0 && (
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-accent-400 text-white text-xs font-bold flex items-center justify-center"
-          >
-            {unread}
-          </motion.div>
-        )}
       </motion.button>
     </div>
   )

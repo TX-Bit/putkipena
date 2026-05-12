@@ -26,7 +26,7 @@ export default function References() {
             <span className="inline-block text-accent-400 text-sm font-semibold tracking-widest uppercase mb-4">Tehtyä työtä</span>
             <h1 className="heading-xl text-white mb-4">Referenssit</h1>
             <p className="text-brand-200 text-lg max-w-xl mx-auto">
-              Yli 500 toteutettua projektia Pohjois-Savossa. Tässä esimerkkejä tehdystä työstä.
+              Yli 500 toteutettua projektia Satakunnassa. Tässä esimerkkejä tehdystä työstä.
             </p>
           </motion.div>
         </div>

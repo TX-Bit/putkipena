@@ -3,7 +3,6 @@ import { motion } from 'framer-motion'
 import { Send, CheckCircle, Phone, Mail, User, MessageSquare, ChevronDown } from 'lucide-react'
 import SectionWrapper, { SectionHeading } from '../components/ui/SectionWrapper'
 import { company } from '../data/company'
-import { services } from '../data/services'
 
 const inputBase = `
   w-full bg-white border-2 border-slate-200
@@ -188,10 +187,11 @@ export default function QuoteForm({ compact = false }) {
                   className={`${inputBase} appearance-none pr-10`}
                 >
                   <option value="">Valitse palvelu...</option>
-                  {services.map((s) => (
-                    <option key={s.id} value={s.id}>{s.title}</option>
-                  ))}
-                  <option value="muu">Muu / en osaa sanoa</option>
+                  <option value="ilmalampopumppu">Ilmalämpöpumppu</option>
+                  <option value="vesi-ilmalampopumppu">Vesi-ilmalämpöpumppu</option>
+                  <option value="maalampopumppu">Maalämpöpumppu</option>
+                  <option value="lvi-huolto">LVI-huolto</option>
+                  <option value="muu">Muu työ</option>
                 </select>
               </div>
             </div>

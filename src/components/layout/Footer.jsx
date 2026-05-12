@@ -36,11 +36,11 @@ export default function Footer() {
               </div>
               <div>
                 <div className="font-bold text-lg">{company.name}</div>
-                <div className="text-brand-300 text-xs">LVI-palvelut Pohjois-Savossa</div>
+                <div className="text-brand-300 text-xs">LVI-palvelut Satakunnassa</div>
               </div>
             </div>
             <p className="text-brand-300 text-sm leading-relaxed mb-5">
-              Asiantunteva LVI-yritys Pohjois-Savossa vuodesta {company.founded}. Lämpöpumput, putkiremontit ja LVI-urakointi ammattitaidolla.
+              Asiantunteva LVI-yritys Satakunnassa vuodesta {company.founded}. Lämpöpumput, putkiremontit ja LVI-urakointi ammattitaidolla.
             </p>
             <div className="flex gap-3">
               {company.social.facebook && (
@@ -152,7 +152,7 @@ export default function Footer() {
             © {new Date().getFullYear()} {company.name}. Kaikki oikeudet pidätetään. Y-tunnus: {company.businessId}
           </p>
           <p className="text-xs text-brand-400">
-            Toteutettu ammattitaidolla Pohjois-Savossa
+            Toteutettu ammattitaidolla Satakunnassa
           </p>
         </div>
       </div>

@@ -7,7 +7,7 @@ const reasons = [
   {
     icon: Award,
     title: 'Yli 15 vuoden kokemus',
-    desc: 'Olemme asentaneet satoja lämpöpumppuja ja tehneet tuhansia LVI-töitä Pohjois-Savossa. Kokemus näkyy laadussa.',
+    desc: 'Olemme asentaneet satoja lämpöpumppuja ja tehneet tuhansia LVI-töitä Satakunnassa. Kokemus näkyy laadussa.',
     color: 'text-amber-500',
     bg: 'bg-amber-50',
   },

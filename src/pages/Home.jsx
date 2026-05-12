@@ -3,9 +3,8 @@ import Hero from '../sections/Hero'
 import Services from '../sections/Services'
 import WhyUs from '../sections/WhyUs'
 import ReferencesSection from '../sections/ReferencesSection'
-import EmergencyBanner from '../sections/EmergencyBanner'
-import Testimonials from '../sections/Testimonials'
 import QuoteForm from '../sections/QuoteForm'
+import ContactInfo from '../sections/ContactInfo'
 
 export default function Home() {
   return (
@@ -13,10 +12,9 @@ export default function Home() {
       <Hero />
       <Services />
       <WhyUs />
-      <EmergencyBanner />
       <ReferencesSection />
-      <Testimonials />
       <QuoteForm />
+      <ContactInfo />
     </main>
   )
 }

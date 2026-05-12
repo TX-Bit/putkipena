@@ -3,7 +3,7 @@ export const testimonials = [
   {
     id: 1,
     name: 'Markku Virtanen',
-    location: 'Maaninka',
+    location: 'Pori',
     rating: 5,
     service: 'Vesi-ilmalämpöpumppu',
     text: 'Erittäin ammattitaitoinen ja nopea palvelu. Asentajat saapuivat sovittuna aikana, työ tehtiin siististi ja loppujen lopuksi säästö lämmityskuluissa on ollut huikea. Suosittelen lämpimästi!',
@@ -12,7 +12,7 @@ export const testimonials = [
   {
     id: 2,
     name: 'Tiina Lehtonen',
-    location: 'Kuopio',
+    location: 'Rauma',
     rating: 5,
     service: 'Maalämpöpumppu',
     text: 'Putkipena teki meille maalämpöratkaisun vanhan öljylämmityksen tilalle. Projekti sujui mallikkaasti, hintataso oli kilpailukykyinen ja he vastasivat kaikkiin kysymyksiimme kärsivällisesti.',
@@ -21,7 +21,7 @@ export const testimonials = [
   {
     id: 3,
     name: 'Jari Korhonen',
-    location: 'Siilinjärvi',
+    location: 'Ulvila',
     rating: 5,
     service: 'LVI-urakointi',
     text: 'Uudisrakennuksen LVI-urakointi sujui erittäin hyvin. Yhteistyö oli mutkatonta, aikataulut pitivät ja laatu oli erinomainen. Myös rakennusmies oli tyytyväinen Putkipenaan.',
@@ -30,7 +30,7 @@ export const testimonials = [
   {
     id: 4,
     name: 'Sari Mäkinen',
-    location: 'Maaninka',
+    location: 'Pori',
     rating: 5,
     service: 'Ilmalämpöpumppu',
     text: 'Tilasimme ilmalämpöpumpun ja oltiin yllättyneitä kuinka nopeasti asennus tapahtui. Laatu on hyvä ja laite toimii hiljaisesti. Hinta oli myös kohtuullinen.',
@@ -39,7 +39,7 @@ export const testimonials = [
   {
     id: 5,
     name: 'Petri Nieminen',
-    location: 'Iisalmi',
+    location: 'Harjavalta',
     rating: 5,
     service: 'LVI-huolto',
     text: 'Lämpöpumppu lakkasi toimimasta joulun alla, soitin päivystysnumeroon ja huoltomies saapui parissa tunnissa. Ongelma korjattiin nopeasti. Erinomainen päivystyspalvelu!',
